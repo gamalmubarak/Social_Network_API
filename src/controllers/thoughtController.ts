@@ -71,4 +71,26 @@ export const getThoughts = async (_req: Request, res: Response) => {
       return res.status(500).json({ message: 'Failed to delete thought', error: err });
     }
   };
+  export const addReaction = async (req: Request<ThoughtParams>, res: Response) => {
+    try {
+      const { reactionBody, username } = req.body;
+      if (!reactionBody || !username) {
+        return res.status(400).json({ message: 'Reaction body and username are required' });
+      }
+  
+      const thought = await Thought.findByIdAndUpdate(
+        req.params.thoughtId,
+        { $push: { reactions: { reactionBody, username, createdAt: new Date() } } },
+        { new: true }
+      );
+  
+      if (!thought) {
+        return res.status(404).json({ message: 'Thought not found' });
+      }
+  
+      return res.status(200).json(thought);
+    } catch (err) {
+      return res.status(500).json({ message: 'Failed to add reaction', error: err });
+    }
+  };
   
