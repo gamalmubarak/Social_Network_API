@@ -14,3 +14,13 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Failed to create user', error: err });
   }
 };
+export const getUsers = async (_req: Request, res: Response) => {
+    try {
+      const users = await User.find()
+      .populate('thoughts')
+      .populate('friends');
+      res.status(200).json(users);
+    } catch (err) {
+      res.status(500).json({ message: 'Failed to retrieve users', error: err });
+    }
+  };
