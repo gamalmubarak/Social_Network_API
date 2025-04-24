@@ -46,3 +46,18 @@ export const getThoughts = async (_req: Request, res: Response) => {
       return res.status(500).json({ message: 'Failed to retrieve thought', error: err });
     }
   };
+  export const updateThought = async (req: Request<ThoughtParams, {}, ThoughtBody>, res: Response) => {
+    try {
+      const thought = await Thought.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+      if (!thought) {
+        return res.status(404).json({ message: 'Thought not found' });
+      }
+      return res.status(200).json(thought);
+    } catch (err) {
+      return res.status(500).json({ message: 'Failed to update thought', error: err });
+    }
+  };
+  
