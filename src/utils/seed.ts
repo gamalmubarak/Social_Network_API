@@ -1,9 +1,7 @@
 import User from '../models/User.js';
 import Thought from '../models/Thought.js';
-import { users, thoughts, friendsMap } from './data.js';
+import { users, thoughts, friendsMap } from './date.js'; // Corrected import path
 import db from '../config/connection.js';
-
-
 
 const seed = async () => {
   try {
@@ -16,26 +14,25 @@ const seed = async () => {
 
       // Insert users
       const createdUsers = await User.insertMany(users);
-     const userMap = new Map(
-      createdUsers.map(user => [
-        user.username,
-        user
-      ])
-    );
-    console.log(`Inserted ${createdUsers.length} users`);
-      
+      const userMap = new Map(
+        createdUsers.map(user => [
+            user.username,
+             user
+            ])
+      );
+      console.log(`Inserted ${createdUsers.length} users`);
+
       // Insert thoughts
       for (const thought of thoughts) {
         console.log(`Processing thought: ${thought.thoughtText} by ${thought.username}`);
         const user = userMap.get(thought.username);
-        
-       
+
         if (!user) {
           console.warn(`Skipping thought: User not found for username '${thought.username}'`);
           continue;
         }
 
-             // Validate each reaction has a username
+        // Validate each reaction has a username
         const validReactions = (thought.reactions || []).map(reaction => {
           const reactionUser = userMap.get(reaction.username);
           if (!reactionUser) {
@@ -49,30 +46,30 @@ const seed = async () => {
           };
         }).filter(Boolean); // Filter out null values
 
-    
         const newThought = await Thought.create({
           thoughtText: thought.thoughtText,
           username: user.username,
           createdAt: new Date(),
           reactions: validReactions,
         });
+
         // Update the user's thoughts array with the new thought ID
         await User.findByIdAndUpdate(user._id, {
           $push: { thoughts: newThought._id },
         });
       }
 
-     // Add friends
+      // Add friends
       for (const [username, friendUsernames] of Object.entries(friendsMap)) {
         const user = userMap.get(username);
         if (!user) {
-            console.warn(`User not found for friends mapping:'${username}'`);
-            continue;
-          }
+          console.warn(`User not found for friends mapping:'${username}'`);
+          continue;
+        }
 
         const friendIds = friendUsernames
           .map(friendName => userMap.get(friendName)?._id)
-          .filter(Boolean); 
+          .filter(Boolean);
 
         await User.findByIdAndUpdate(user._id, {
           $addToSet: { friends: { $each: friendIds } },
