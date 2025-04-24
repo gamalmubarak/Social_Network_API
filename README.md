@@ -83,7 +83,14 @@ Relationships between users and thoughts are managed using Mongoose.
 
 The application You can access it at:(https://github.com/gamalmubarak/Social_Network_API)
 
- Watch this Video for a walk through of the app [Application Demo](https://drive.google.com/file/d/1fLLdEnz6Fz2GAWT-aCfQFBaNeUc2nZKk/view)
+ Watch this Video for a walk through of the app [Application Demo](https://drive.google.com/file/d/1lAw5l_4pq7zVt32BplvSkp3osO9SpH6D/view?usp=sharing)
+
+ see this screenshots of the app:
+ (https://1drv.ms/i/c/3b216777a5c674e6/EdoBzSbyGZ1PgQxKXSt3bcMBvCnTsHBTdCP2I04HMN6o4A?e=bRk6sm)
+ (https://1drv.ms/i/c/3b216777a5c674e6/EQx25frKsvNIi6s21up11NABbl0DtJxQmlRj_3mekh8iog?e=hdIudR)
+ (https://1drv.ms/i/c/3b216777a5c674e6/EZS7kiXzJLZFqmx0eBrRtZkB9H_XueI6lrfcX6pG0s1tkA?e=IaZdlU)
+ (https://1drv.ms/i/c/3b216777a5c674e6/EZpdM4jm-HFBhkYebTMjC2UBBsboZ8xbeslypZUOsetGnw?e=ojFmXF)
+ 
 ---
 
 ## License 
