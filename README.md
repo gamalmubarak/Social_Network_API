@@ -35,6 +35,7 @@ Database:
 
 Uses MongoDB for storing users, thoughts, and reactions.
 Relationships between users and thoughts are managed using Mongoose.
+
 ---
 
 ## Installation
