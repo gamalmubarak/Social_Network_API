@@ -60,4 +60,15 @@ export const getThoughts = async (_req: Request, res: Response) => {
       return res.status(500).json({ message: 'Failed to update thought', error: err });
     }
   };
+  export const deleteThought = async (req: Request<ThoughtParams>, res: Response) => {
+    try {
+      const thought = await Thought.findByIdAndDelete(req.params.id);
+      if (!thought) {
+        return res.status(404).json({ message: 'Thought not found' });
+      }
+      return res.status(200).json({ message: 'Thought deleted' });
+    } catch (err) {
+      return res.status(500).json({ message: 'Failed to delete thought', error: err });
+    }
+  };
   
